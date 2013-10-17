@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d %5p [%t] | %-55logger{55} | %m %n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="TraceLog" level="TRACE"/>
+     
+    <logger name="se.davvs" level="DEBUG"/>
+    <logger name="org.springframework.security" level="WARN"/>
+
+<!--     <logger name="org.thymeleaf" level="TRACE"/> -->
+    
+    <!--  Request debugging -->
+<!--     <logger name="org.apache.http.wire" level="DEBUG"/> -->
+    
+    <root level="WARN">
+        <appender-ref ref="CONSOLE" />
+    </root>
+</configuration>

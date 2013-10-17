@@ -1,0 +1,4 @@
+<Context>
+    <!--  Disable session persistance in tomcat containers -->
+	<Manager pathname="" />
+</Context>

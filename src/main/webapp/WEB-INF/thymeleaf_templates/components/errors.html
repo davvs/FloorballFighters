@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Player components</title>
+    
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/static/bootstrap/css/bootstrap.min.css}" href="../../../static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    
+    <!--  Site specific CSS -->
+    <link th:href="@{/static/layout.css}" href="../../../static/layout.css" rel="stylesheet" />
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" layout:fragment="header" layout:include="header :: header">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="container">
+       <div class="navbar-header">
+             <a class="navbar-brand" href="#">I am DUMMY header</a>
+       </div>
+      </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div layout:fragment="errors">
+				<div th:if="${error}" class="alert alert-danger">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<p th:text="${error}">Custom error</p>
+				</div>
+			</div>
+        </div> <!--/row-->
+    </div>
+
+    <hr/>
+
+    <div class="container">
+        &copy; Easy floorball league
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script th:src="@{/static/jquery.min.js}" src="../../../static/jquery.min.js"></script>
+    <script th:src="@{/static/bootstrap/js/bootstrap.min.js}" src="../../../static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

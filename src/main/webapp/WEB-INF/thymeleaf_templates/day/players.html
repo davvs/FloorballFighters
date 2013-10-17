@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="components/layout">
+
+  <head>
+    <meta charset="UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <title>Floorball fighters</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/static/bootstrap/css/bootstrap.min.css}" href="../../../static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    
+    <!--  Site specific CSS -->
+    <link th:href="@{/static/layout.css}" href="../../../static/layout.css" rel="stylesheet" />
+  </head>
+
+  <body>
+	<div class="container" layout:fragment="content">
+		<h2>Select todays fighters</h2>
+
+		<form action="#" th:object="${players}" th:action="@{${'/day/' + players.dayId + '/updatePlayers'}}" method="post">
+			<ul th:remove="all-but-first">
+				<li th:each="player : ${allPlayers}">
+					<label th:for="${#ids.next('players')}" class="checkbox-inline">
+						<input value="player1" type="checkbox" th:field="*{players}" th:value="${player.id}" />
+						<span th:text="${player.name}">asdfplayer1</span>
+					</label>
+				</li>
+			</ul>
+		    <input type="submit" value="Proceed to action"/>
+		</form>
+		
+		<h2>Register new fighter</h2>
+		<form action="#" th:object="${createPlayerForm}" th:action="@{${'/day/' + createPlayerForm.dayId + '/createPlayer'}}" method="post">
+			<label for="playerName" class="checkbox-inline">
+				<input id="playerName" type="text" th:field="*{playerName}" placeholder="Player name here" />
+			</label>
+		    <input type="submit" value="Create player"/>
+		</form>
+    </div>
+    
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script th:src="@{/static/jquery.min.js}" src="../../../static/jquery.min.js"></script>
+    <script th:src="@{/static/bootstrap/js/bootstrap.min.js}" src="../../../static/bootstrap/js/bootstrap.min.js"></script>
+
+  </body>
+
+</html>
