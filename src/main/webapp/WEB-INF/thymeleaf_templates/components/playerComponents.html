@@ -39,7 +39,7 @@
 					<div class="form-group"
 						th:classappend="${#fields.hasErrors('searchString')}? 'has-error'">
 						<label class="control-label">Search for</label> <input type="text"
-							class="form-control" placeholder="nucleus id or email"
+							class="form-control" placeholder="id or email"
 							th:field="*{searchString}"
 							th:classappend="${#fields.hasErrors('searchString')}? 'fieldError'" />
 						<div th:errors="*{searchString}" class="alert alert-danger">
