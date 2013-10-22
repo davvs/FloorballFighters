@@ -20,28 +20,62 @@
   <body>
 	<div class="container" layout:fragment="content">
 <!-- 		<h2 th:text="${'Game number ' + showGame}">Game number 123</h2> -->
+
+	    <div class="row">
+	    	<div class="col-sm-5 text-left">
+				<form class="col-sm-4" action="#" th:action="@{${'/game/' + showGame + '/score/ist/1'}}" method="post">
+				    <input class="btn" type="submit" value="+1 Score"/>
+				</form>
+				<div class="col-sm-8 ist" >Ist</div>
+	    	</div>
+
+        	<div class="col-sm-1 text-center" th:text="${scoreIst + ' - ' + scoreVest}">0 - 3</div>
+	    	<div class="col-sm-5 text-right">
+				<div class="col-sm-8 vest" >V&#228;st</div>
+				<form class="col-sm-4" action="#" th:action="@{${'/game/' + showGame + '/score/vest/1'}}" method="post">
+				    <input class="btn" type="submit" value="+1 Score"/>
+				</form>
+	    	</div>
+		</div>
 		<div class="row show-grid">
-	        <div class="col-xs-6">
-	        	<h2>Ist</h2>
-				<ul class="span6 list-group" th:remove="all-but-first">
-					<li class="list-group-item ist" th:each="gameMember : ${istPlayers}" th:text="${gameMember.player.name}">player1</li>
-					<li class="list-group-item ist" >player2</li>
-					<li class="list-group-item ist" >player3</li>
-					<li class="list-group-item ist" >player4</li>
-					<li class="list-group-item ist" >player5</li>
+	        <div class="col-xs-5">
+				<ul class="list-group" th:remove="all-but-first">
+					<li class="list-group-item ist text-right" th:each="gameMember : ${istPlayers}" th:text="${gameMember.player.name}">player1</li>
+					<li class="list-group-item ist text-right" >player2</li>
+					<li class="list-group-item ist text-right" >player3</li>
+					<li class="list-group-item ist text-right" >player4</li>
+					<li class="list-group-item ist text-right" >player5</li>
 				</ul>
 			</div>
-	        <div class="col-xs-6">
-	        	<h2>V&#228;st</h2>
-				<ul class="span6 list-group" th:remove="all-but-first">
-					<li class="list-group-item vest"  th:each="gameMember : ${vestPlayers}" th:text="${gameMember.player.name}">player1</li>
-					<li class="list-group-item vest" >player2</li>
-					<li class="list-group-item vest" >player3</li>
-					<li class="list-group-item vest" >player4</li>
-					<li class="list-group-item vest" >player5</li>
+			<div class="col-xs-1" ></div>
+	        <div class="col-xs-5">
+				<ul class="list-group" th:remove="all-but-first">
+					<li class="list-group-item vest text-left"  th:each="gameMember : ${vestPlayers}" th:text="${gameMember.player.name}">player1</li>
+					<li class="list-group-item vest text-left" >player2</li>
+					<li class="list-group-item vest text-left" >player3</li>
+					<li class="list-group-item vest text-left" >player4</li>
+					<li class="list-group-item vest text-left" >player5</li>
 				</ul>
 			</div>
       </div>
+
+	    <div class="row">
+	    	<div class="col-sm-4 text-left">
+				<form action="#" th:action="@{${'/game/' + showGame + '/score/ist/-1'}}" method="post">
+				    <input class="btn" type="submit" value="-1 Score"/>
+				</form>
+	    	</div>
+        	<div class="col-sm-3 text-center">
+				<form action="#" th:action="@{${'/day/' + showDay + '/view'}}" method="get">
+				    <input class="btn" type="submit" value="Leave game"/>
+				</form>
+        	</div>
+	    	<div class="col-sm-4 text-right">
+				<form action="#" th:action="@{${'/game/' + showGame + '/score/vest/-1'}}" method="post">
+				    <input class="btn" type="submit" value="-1 Score"/>
+				</form>
+	    	</div>
+		</div>
     </div>
     
     <!-- Bootstrap core JavaScript

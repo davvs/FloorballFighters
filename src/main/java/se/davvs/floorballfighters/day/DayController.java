@@ -116,7 +116,7 @@ public class DayController {
 			 GameTeamMember gameTeamMember = new GameTeamMember();
 			 gameTeamMember.setGame(game);
 			 gameTeamMember.setPlayer(player);
-			 gameTeamMember.setTeam(vest ? 1 : 0);
+			 gameTeamMember.setTeam(vest ? 2 : 1);
 			 vest = !vest;
 			 gameTeamMembers.add(gameTeamMember);
 			 Set<GameTeamMember> playerGameTeamMember = player.getGameTeamMembers();

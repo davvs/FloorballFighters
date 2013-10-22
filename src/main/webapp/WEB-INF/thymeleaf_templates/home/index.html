@@ -24,6 +24,12 @@
 		<form action="#" th:action="@{/day/new}" method="post">
 		    <input type="submit" value="New day"/>
 		</form>
+		
+		<ul>
+		<li th:each="day : ${days}">
+			<a href="#" th:href="@{${'/day/' + day.id + '/view'}}" th:text="${'Day ' + day.id}">Day 1</a>
+		</li>
+		</ul>
     </div>
     
     <!-- Bootstrap core JavaScript
