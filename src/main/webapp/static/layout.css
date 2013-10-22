@@ -12,3 +12,12 @@ body {
 	list-style-type: none;
 	padding: 0;
 }
+
+.ist {
+	background-color: #ccddff;
+}
+
+.vest {
+	background-color: #ff3333;
+	color: #ffffff;
+}

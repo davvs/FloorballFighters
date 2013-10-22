@@ -26,13 +26,14 @@ http://www.springframework.org/schema/context/spring-context-3.2.xsd">
     <http pattern="/static/**" security="none" />
     
   	<http use-expressions="true" auto-config="false" entry-point-ref="loginUrlAuthenticationEntryPoint" disable-url-rewriting="true">
-		<intercept-url pattern="/user/login" access="permitAll"/>
+<!-- 		<intercept-url pattern="/user/login" access="permitAll"/> -->
 
-		<intercept-url pattern="/day/**" access="isAuthenticated()"/>
-		<intercept-url pattern="/" access="isAuthenticated()"/>
-		<intercept-url pattern="/user/**" access="isAuthenticated()"/>
+<!-- 		<intercept-url pattern="/day/**" access="isAuthenticated()"/> -->
+<!-- 		<intercept-url pattern="/" access="isAuthenticated()"/> -->
+<!-- 		<intercept-url pattern="/user/**" access="isAuthenticated()"/> -->
 
-		<intercept-url pattern="/**" access="denyAll" />
+<!-- 		<intercept-url pattern="/**" access="denyAll" /> -->
+		<intercept-url pattern="/**" access="permitAll"/>
   
 		<logout logout-url="/logout" delete-cookies="JSESSIONID"/>
  		<custom-filter position="FORM_LOGIN_FILTER" ref="usernamePasswordAuthenticationFilter"/>
