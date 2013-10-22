@@ -21,3 +21,7 @@ body {
 	background-color: #ff3333;
 	color: #ffffff;
 }
+
+.focus {
+	font-size: 64px;
+}

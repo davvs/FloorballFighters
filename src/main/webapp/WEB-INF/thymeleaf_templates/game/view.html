@@ -22,16 +22,17 @@
 <!-- 		<h2 th:text="${'Game number ' + showGame}">Game number 123</h2> -->
 
 	    <div class="row">
-	    	<div class="col-sm-5 text-left">
+	    	<div class="col-sm-4 text-center">
 				<form class="col-sm-4" action="#" th:action="@{${'/game/' + showGame + '/score/ist/1'}}" method="post">
 				    <input class="btn" type="submit" value="+1 Score"/>
 				</form>
-				<div class="col-sm-8 ist" >Ist</div>
+				<div class="col-sm-8 ist focus" >Ist</div>
 	    	</div>
 
-        	<div class="col-sm-1 text-center" th:text="${scoreIst + ' - ' + scoreVest}">0 - 3</div>
-	    	<div class="col-sm-5 text-right">
-				<div class="col-sm-8 vest" >V&#228;st</div>
+        	<div class="col-sm-3 text-center focus" th:text="${scoreIst + ' - ' + scoreVest}">12 - 12</div>
+        	
+	    	<div class="col-sm-4 text-center">
+				<div class="col-sm-8 vest focus" >V&#228;st</div>
 				<form class="col-sm-4" action="#" th:action="@{${'/game/' + showGame + '/score/vest/1'}}" method="post">
 				    <input class="btn" type="submit" value="+1 Score"/>
 				</form>
