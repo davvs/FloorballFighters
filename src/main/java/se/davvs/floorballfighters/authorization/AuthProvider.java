@@ -22,7 +22,9 @@ public class AuthProvider implements AuthenticationProvider {
 
         String email = String.valueOf(auth.getPrincipal());
         String password = String.valueOf(auth.getCredentials());
-
+        if (!password.equals("easyfloorball")){
+        	throw new AdminAuthenticationException("Wrong password!");
+        }
         List<SimpleGrantedAuthority> grantedAuths = new ArrayList<SimpleGrantedAuthority>();
         grantedAuths.add(new SimpleGrantedAuthority("ROLE_ACCESS"));
         UsernamePasswordAuthenticationToken newAuth = new UsernamePasswordAuthenticationToken(name, null, grantedAuths);

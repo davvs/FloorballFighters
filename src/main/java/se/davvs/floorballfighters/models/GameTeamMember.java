@@ -21,6 +21,8 @@ public class GameTeamMember {
 
 	private Player player;
 	private Integer team;
+	private Integer goals;
+	private Integer assists;
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -38,6 +40,20 @@ public class GameTeamMember {
 	}
 	public void setTeam(Integer team) {
 		this.team = team;
+	}
+	@Column(name="goals")
+	public Integer getGoals() {
+		return goals;
+	}
+	@Column(name="assists")
+	public void setGoals(Integer goals) {
+		this.goals = goals;
+	}
+	public Integer getAssists() {
+		return assists;
+	}
+	public void setAssists(Integer assists) {
+		this.assists = assists;
 	}
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
