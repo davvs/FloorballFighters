@@ -24,7 +24,13 @@
 		    <input type="submit" value="Make random teams!"/>
 		</form>
 		<ul th:remove="all-but-first">
-			<li th:each="player : ${day.players}" th:text="${player.name}">player1</li>
+			<li th:each="dayPlayer : ${day.dayPlayers}">
+				<span th:text="${dayPlayer.player.name}">player1</span>
+				<span th:text="${dayPlayer.requiredTeam > 0 ? dayPlayer.requiredTeam : '[any team]'}">team</span>
+					<form action="#" th:action="@{${'/day/' + showDay + '/playerToggleTeam/' + dayPlayer.id}}" method="post">
+					    <input type="submit" value="Toggle team"/>
+					</form>
+			</li>
 			<li>player2</li>
 			<li>player3</li>
 			<li>player4</li>

@@ -7,15 +7,11 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -31,7 +27,7 @@ public class Day implements Serializable {
 
     private Integer id;
     private Date date;
-    private Set<Player> players = new HashSet<Player>(0);
+    private Set<DayPlayer> dayPlayers = new HashSet<DayPlayer>(0);
     private Set<Game> games = new HashSet<Game>(0);
 
 	@Id
@@ -54,17 +50,13 @@ public class Day implements Serializable {
 		this.date = date;
 	}
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinTable(name = "day_player", catalog = "floorballfighters",
-			joinColumns = { 
-				@JoinColumn(name = "did", nullable = false, updatable = true) }, 
-				inverseJoinColumns = { @JoinColumn(name = "pid", nullable = false, updatable = true) })
-	public Set<Player> getPlayers() {
-		return players;
+	@OneToMany(mappedBy="day", fetch = FetchType.EAGER)
+	public Set<DayPlayer> getDayPlayers() {
+		return dayPlayers;
 	}
 
-	public void setPlayers(Set<Player> players) {
-		this.players = players;
+	public void setDayPlayers(Set<DayPlayer> dayPlayers) {
+		this.dayPlayers = dayPlayers;
 	}
 	
 	@OneToMany(mappedBy="day", fetch = FetchType.EAGER)

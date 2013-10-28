@@ -79,8 +79,6 @@ CREATE TABLE `game_team_member` (
   `gId` int(11) NOT NULL,
   `pId` int(11) NOT NULL,
   `team` int(11) NOT NULL,
-  `goals` int(11) NOT NULL,
-  `assists` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `gId` (`gId`),
   KEY `pId` (`pId`),
@@ -113,3 +111,14 @@ CREATE TABLE `player` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2013-10-17 19:26:04
+
+DROP TABLE IF EXISTS `goals`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `goals` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `gpid` int(11) NOT NULL,
+  `goalType` int(11),
+  PRIMARY KEY (`id`),
+  CONSTRAINT `game_player_id_fk` FOREIGN KEY (`gpid`) REFERENCES `game_team_player` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

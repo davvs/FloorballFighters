@@ -13,14 +13,30 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="game_team_member", catalog = "floorballfighters")
-public class GameTeamMember {
+@Table(name="day_player", catalog = "floorballfighters")
+public class DayPlayer {
 
 	private Integer id;
-	private Game game;
-
+	private Day day;
 	private Player player;
-	private Integer team;
+	private Integer requiredTeam;
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "did", updatable = true)
+	public Day getDay() {
+		return day;
+	}
+	public void setDay(Day day) {
+		this.day = day;
+	}
+	
+	@Column(name = "requiredteam")
+	public Integer getRequiredTeam() {
+		return requiredTeam;
+	}
+	public void setRequiredTeam(Integer requiredTeam) {
+		this.requiredTeam = requiredTeam;
+	}
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -31,23 +47,7 @@ public class GameTeamMember {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	@Column(name="team")
-	public Integer getTeam() {
-		return team;
-	}
-	public void setTeam(Integer team) {
-		this.team = team;
-	}
-	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "gid", updatable = true)
-	public Game getGame() {
-		return game;
-	}
-	public void setGame(Game game) {
-		this.game = game;
-	}
+
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "pid", updatable = true)

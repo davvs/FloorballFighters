@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -25,7 +24,7 @@ public class Player implements Serializable {
 
     private Integer id;
     private String name;
-    private Set<Day> days = new HashSet<Day>(0);
+    private Set<DayPlayer> dayPlayers = new HashSet<DayPlayer>(0);
     private Set<GameTeamMember> gameTeamMembers = new HashSet<GameTeamMember>(0);
 
 	@Id
@@ -48,13 +47,13 @@ public class Player implements Serializable {
 		this.name = name;
 	}
 	
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "players")
-	public Set<Day> getDays() {
-		return days;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "player")
+	public Set<DayPlayer> getDayPlayers() {
+		return dayPlayers;
 	}
 
-	public void setDays(Set<Day> days) {
-		this.days = days;
+	public void setDayPlayers(Set<DayPlayer> dayPlayers) {
+		this.dayPlayers = dayPlayers;
 	}
 
 	@OneToMany(mappedBy="player", fetch = FetchType.EAGER)
