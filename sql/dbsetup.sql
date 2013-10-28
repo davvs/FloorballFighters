@@ -117,8 +117,15 @@ DROP TABLE IF EXISTS `goals`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `goals` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `gpid` int(11) NOT NULL,
+  `scorerId` int(11),
+  `assisterId` int(11),
+  `team` int(11),
+  `gameId` int(11),
   `goalType` int(11),
   PRIMARY KEY (`id`),
-  CONSTRAINT `game_player_id_fk` FOREIGN KEY (`gpid`) REFERENCES `game_team_player` (`id`)
+  CONSTRAINT `scorer_id_fk` FOREIGN KEY (`scorerId`) REFERENCES `game_team_member` (`id`),
+  CONSTRAINT `assister_id_fk` FOREIGN KEY (`assisterId`) REFERENCES `game_team_member` (`id`),
+  CONSTRAINT `game_id_fk` FOREIGN KEY (`gameId`) REFERENCES `game` (`id`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

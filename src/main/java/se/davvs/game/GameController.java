@@ -2,29 +2,33 @@ package se.davvs.game;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import se.davvs.floorballfighters.jparepositories.GameRepository;
+import se.davvs.floorballfighters.jparepositories.GameTeamMemberRepository;
+import se.davvs.floorballfighters.jparepositories.GoalRepository;
 import se.davvs.floorballfighters.models.Game;
 import se.davvs.floorballfighters.models.GameTeamMember;
-import se.davvs.floorballfighters.models.Player;
+import se.davvs.floorballfighters.models.Goal;
 
 @Controller
 @RequestMapping(value="/game/")
 public class GameController {
 
 	@Resource GameRepository gameRepository;
+	@Resource GoalRepository goalRepository;
+	@Resource GameTeamMemberRepository gameTeamMemberRepository;
 	
 	 @RequestMapping(value="/{showGame}/view", method = RequestMethod.GET)
-	 public String showHome(@PathVariable Integer showGame, Model model) throws GameException{
+	 public String showHome(@PathVariable Integer showGame, CustomScoreForm customScoreForm, Model model) throws GameException{
 		 Game game = gameRepository.findOne(showGame);
 		 List<GameTeamMember> istPlayers = new LinkedList<GameTeamMember>();
 		 List<GameTeamMember> vestPlayers = new LinkedList<GameTeamMember>();
@@ -38,12 +42,25 @@ public class GameController {
 				 throw new GameException("GameTeamMember is invalid team:" + gameTeamMember.getTeam());
 			 }
 		 }
-		 model.addAttribute("scoreIst", game.getTeam1Score());
-		 model.addAttribute("scoreVest", game.getTeam2Score());
+		 
+		 Integer istScore = game.getTeam1Score();
+		 Integer vestScore = game.getTeam2Score();
+		 for (Goal goal : game.getGoals()) {
+			 if (goal.getTeam() == 2) {
+				 vestScore ++;
+			 } else	if (goal.getTeam() == 1) {
+				 istScore ++;
+			 }
+ 		 }
+
+		 model.addAttribute("scoreIst", istScore);
+		 model.addAttribute("scoreVest", vestScore);
 		 model.addAttribute("istPlayers", istPlayers);
 		 model.addAttribute("vestPlayers", vestPlayers);
 		 model.addAttribute("showGame", showGame);
 		 model.addAttribute("showDay", game.getDay().getId());
+		 model.addAttribute("customScoreForm", customScoreForm);
+		 model.addAttribute("allScoreTypes", AllScoreTypes.allScoreTypes);
 		 return "game/view";
 	 }
 	 
@@ -60,4 +77,35 @@ public class GameController {
 		 gameRepository.save(game);
 		 return "redirect:/game/" + showGame + "/view";
 	 }
+	 
+	 @RequestMapping(value="/{showGame}/score/custom", method = RequestMethod.POST)
+	 public String showHome(@PathVariable Integer showGame, Model model, CustomScoreForm customScoreForm, BindingResult bindingResult) throws GameException{
+		 if (bindingResult.hasErrors()){
+			 return "redirect:/game/" + showGame + "/view";
+		 }
+		 Goal goal = new Goal();
+		 GameTeamMember scorer  = null;
+		 GameTeamMember assister = null;
+		 if (customScoreForm.getScorer() != null){
+			 scorer = gameTeamMemberRepository.findOne(customScoreForm.getScorer());
+		 }
+		 if (customScoreForm.getAssister() != null && customScoreForm.getAssister() != customScoreForm.getScorer()){
+			 assister = gameTeamMemberRepository.findOne(customScoreForm.getAssister());
+		 }
+		 Game game = gameRepository.findOne(customScoreForm.getGameId());
+		 
+		 try{
+			 String s = customScoreForm.getGoalType().replaceAll("goalType", "");
+			 Integer goalType = Integer.valueOf(s)  - 1;
+			 goal.setGoalType(goalType);
+		 } catch (Exception e) {}
+
+		 goal.setAssister(assister);
+		 goal.setScorer(scorer);
+		 goal.setTeam(customScoreForm.getTeam());
+		 goal.setGame(game);
+		 goalRepository.save(goal);
+		 return "redirect:/game/" + customScoreForm.getGameId() + "/view";
+	 }
 }
+ 

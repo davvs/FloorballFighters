@@ -25,3 +25,20 @@ body {
 .focus {
 	font-size: 64px;
 }
+
+.scoreIcon {
+	width: 32px;
+	height: 32px;
+}
+
+#vestScore h2, #istScore h2 {
+	font-size: 3em;
+}  
+
+#vestScore li, #istScore li {
+	list-style-type: none;
+}
+
+#vestScore li, #istScore li, #istScore input, #istScore button, #vestScore input, #vestScore button {
+	font-size: 2em;
+}  

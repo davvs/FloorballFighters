@@ -30,6 +30,15 @@ public class Game implements Serializable {
 	private Integer team2Score =0;
     private Day day;
     private Set<GameTeamMember> gameTeamMembers = new HashSet<GameTeamMember>(0);
+    private Set<Goal> goals;
+    
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "game")
+	public Set<Goal> getGoals() {
+		return goals;
+	}
+	public void setGoals(Set<Goal> goals) {
+		this.goals = goals;
+	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)

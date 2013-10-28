@@ -2,6 +2,8 @@ package se.davvs.floorballfighters.models;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +24,24 @@ public class GameTeamMember {
 
 	private Player player;
 	private Integer team;
+	private Set<Goal> scoredGoals;
+	private Set<Goal> assistedGoals;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "scorer")
+	public Set<Goal> getScoredGoals() {
+		return scoredGoals;
+	}
+	public void setScoredGoals(Set<Goal> scoredGoals) {
+		this.scoredGoals = scoredGoals;
+	}
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "assister")
+	public Set<Goal> getAssistedGoals() {
+		return assistedGoals;
+	}
+	public void setAssistedGoals(Set<Goal> assistedGoals) {
+		this.assistedGoals = assistedGoals;
+	}
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)

@@ -17,16 +17,45 @@ import javax.persistence.Table;
 public class Goal {
 
 	private Integer id;
-	private GameTeamMember gameTeamMember;
+	private GameTeamMember scorer;
+	private GameTeamMember assister;
+	private Game game;
 	private Integer goalType;
+	private Integer team;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "gpid", updatable = true)
-	public GameTeamMember getGameTeamMember() {
-		return gameTeamMember;
+	@JoinColumn(name = "scorerid", updatable = true)
+	public GameTeamMember getScorer() {
+		return scorer;
 	}
-	public void setGameTeamMember(GameTeamMember gameTeamMember) {
-		this.gameTeamMember = gameTeamMember;
+	public void setScorer(GameTeamMember scorer) {
+		this.scorer = scorer;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "assisterid", updatable = true)
+	public GameTeamMember getAssister() {
+		return assister;
+	}
+	public void setAssister(GameTeamMember assister) {
+		this.assister = assister;
+	}
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "gameid", updatable = true)
+	public Game getGame() {
+		return game;
+	}
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	@Column(name = "team")
+	public Integer getTeam() {
+		return team;
+	}
+	public void setTeam(Integer team) {
+		this.team = team;
 	}
 	
 	@Column(name = "goaltype")
