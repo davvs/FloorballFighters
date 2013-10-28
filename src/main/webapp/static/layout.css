@@ -31,6 +31,10 @@ body {
 	height: 32px;
 }
 
+#istName, #vestName {
+	cursor:pointer;
+}
+
 #vestScore h2, #istScore h2 {
 	font-size: 3em;
 }  
@@ -42,3 +46,7 @@ body {
 #vestScore li, #istScore li, #istScore input, #istScore button, #vestScore input, #vestScore button {
 	font-size: 2em;
 }  
+
+.cancel {
+	margin-top: 5em;
+}
