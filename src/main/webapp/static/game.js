@@ -17,6 +17,8 @@ $('#vestName').click(function(){
 });
 
 $('.cancel').click(function(){
+	  $('form').each(function() { this.reset(); });
+
 	  $('#scoreScreen').css('display','block');
 	  $('#vestScore').css('display','none');
 	  $('#istScore').css('display','none');

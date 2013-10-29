@@ -19,37 +19,46 @@
 
   <body>
 	<div class="container" layout:fragment="content">
-		<h2 th:text="${'Day number ' + showDay}">Day number 123</h2>
-		<form action="#" th:action="@{${'/day/' + showDay + '/matchMakeAllRandom'}}" method="post">
-		    <input type="submit" value="Make random teams!"/>
-		</form>
-		<ul th:remove="all-but-first">
-			<li th:each="dayPlayer : ${day.dayPlayers}">
-				<span th:text="${dayPlayer.player.name}">player1</span>
-				<span th:text="${dayPlayer.requiredTeam > 0 ? dayPlayer.requiredTeam : '[any team]'}">team</span>
-					<form action="#" th:action="@{${'/day/' + showDay + '/playerToggleTeam/' + dayPlayer.id}}" method="post">
-					    <input type="submit" value="Toggle team"/>
-					</form>
-			</li>
-			<li>player2</li>
-			<li>player3</li>
-			<li>player4</li>
-			<li>player5</li>
-		</ul>
-
-		<h2>Todays games</h2>
-		<ul th:remove="all-but-first">
-			<li th:each="game : ${day.games}">
-				<a th:href="@{${'/game/' + game.id + '/view'}}" href="#" th:text="${'game ' + game.id}">game 1: 3-5</a>
-			</li>
-			<li>game 1: 3-5</li>
-			<li>game 3: 4-2</li>
-			<li>game 4: 3-5</li>
-			<li>game 17: 3-5</li>
-		</ul>
-		<form action="#" th:action="@{${'/day/' + showDay + '/players'}}" method="get">
-		    <input type="submit" value="Edit players"/>
-		</form>
+		<div class="row">
+			<h2 th:text="${'Day number ' + showDay}">Day number 123</h2>
+			<form action="#" th:action="@{${'/day/' + showDay + '/matchMakeAllRandom'}}" method="post">
+			    <input type="submit" class="btn btn-primary" value="Make random teams!"/>
+			</form>
+		</div>
+		<div class="row">
+			<ul class="stripedPlayerList" th:remove="all-but-first">
+				<li th:each="dayPlayer : ${day.dayPlayers}">
+					<span class="pull-left" th:text="${dayPlayer.player.name}">player1</span>
+					<span class="pull-left ist" th:if="${dayPlayer.requiredTeam eq 1}">(Loyal to Ist)</span>
+					<span class="pull-left vest" th:if="${dayPlayer.requiredTeam eq 2}">(Loyal to Vest)</span>
+					<div class="pull-right">
+						<form action="#" th:action="@{${'/day/' + showDay + '/playerToggleTeam/' + dayPlayer.id}}" method="post">
+						    <input type="submit" class="btn btn-info" value="Toggle team"/>
+						</form>
+					</div>
+					<div class="clearfix"></div>
+				</li>
+				<li>player2</li>
+				<li>player3</li>
+				<li>player4</li>
+				<li>player5</li>
+			</ul>
+			<form action="#" th:action="@{${'/day/' + showDay + '/players'}}" method="get">
+			    <input type="submit" class="btn btn-info" value="Change participating players"/>
+			</form>
+		</div>
+		<div class="row">
+			<h2>Todays games</h2>
+			<ul th:remove="all-but-first">
+				<li th:each="game : ${day.games}">
+					<a th:href="@{${'/game/' + game.id + '/view'}}" href="#" th:text="${'game ' + game.id}">game 1: 3-5</a>
+				</li>
+				<li>game 1: 3-5</li>
+				<li>game 3: 4-2</li>
+				<li>game 4: 3-5</li>
+				<li>game 17: 3-5</li>
+			</ul>
+		</div>
     </div>
     
     <!-- Bootstrap core JavaScript

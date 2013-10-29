@@ -84,8 +84,8 @@
     <div class="container vest" id="vestScore">
     	<form action="#" th:action="@{${'/game/' + showGame + '/score/custom'}}" th:object="${customScoreForm}" method="post">
     		<div class="row">
-				<div class="col-md-4">
-					<h2>Scorer</h2>
+				<div class="col-xs-4">
+					<h3>Scorer</h3>
 			    	<ul>
 					  <li th:each="gameMember : ${vestPlayers}">
 					    <input type="radio" th:field="*{scorer}" th:value="${gameMember.id}" />
@@ -94,8 +94,8 @@
 					</ul>
 				</div>
 	
-				<div class="col-md-4">
-					<h2>Assister</h2>
+				<div class="col-xs-3">
+					<h3>Assister</h3>
 			    	<ul>
 					  <li th:each="player : ${vestPlayers}">
 					    <input type="radio" th:field="*{assister}" th:value="${player.id}" />
@@ -104,8 +104,8 @@
 					</ul>
 				</div>
 				
-				<div class="col-md-4">
-					<h2>Goal type</h2>
+				<div class="col-xs-4">
+					<h3>Type</h3>
 					<ul>
 					  <li th:each="ty : ${allScoreTypes}">
 					    <input type="radio" th:field="*{goalType}" th:value="${#ids.next('goalType')}" />
@@ -119,7 +119,7 @@
 					<input type="hidden" name="team" th:value="2"/>
 					<input type="hidden" name="gameId" th:value="${showGame}"/>
 					<input type="hidden" name="dayId" th:value="${showDay}"/>
-					<input class="btn" type="submit" value="+1 till Väst"/>
+					<input class="btn" type="submit" value="Add score!"/>
 				</div>
 			</div>
 		</form>
@@ -133,8 +133,8 @@
     <div class="container ist" id="istScore">
     	<form action="#" th:action="@{${'/game/' + showGame + '/score/custom'}}" th:object="${customScoreForm}" method="post">
     		<div class="row">
-				<div class="col-md-4">
-					<h2>Scorer</h2>
+				<div class="col-xs-3">
+					<h3>Scorer</h3>
 			    	<ul>
 					  <li th:each="gameMember : ${istPlayers}">
 					    <input type="radio" th:field="*{scorer}" th:value="${gameMember.id}" />
@@ -143,8 +143,8 @@
 					</ul>
 				</div>
 	
-				<div class="col-md-4">
-					<h2>Assister</h2>
+				<div class="col-xs-3">
+					<h3>Assister</h3>
 			    	<ul>
 					  <li th:each="player : ${istPlayers}">
 					    <input type="radio" th:field="*{assister}" th:value="${player.id}" />
@@ -153,8 +153,8 @@
 					</ul>
 				</div>
 				
-				<div class="col-md-4">
-					<h2>Goal type</h2>
+				<div class="col-xs-4">
+					<h3>Goal type</h3>
 					<ul>
 					  <li th:each="ty : ${allScoreTypes}">
 					    <input type="radio" th:field="*{goalType}" th:value="${#ids.next('goalType')}" />
@@ -168,14 +168,12 @@
 					<input type="hidden" name="team" th:value="1"/>
 					<input type="hidden" name="gameId" th:value="${showGame}"/>
 					<input type="hidden" name="dayId" th:value="${showDay}"/>
-					<input class="btn" type="submit" value="+1 till Ist"/>
+					<input class="btn" type="submit" value="Add score!"/>
 				</div>
 			</div>
 		</form>
-		<div class="row">
-			<div class="col-md-4 col-md-offset-8">
-				<button class="cancel btn">Cancel</button>
-			</div>
+		<div class="col-md-4 col-md-offset-8">
+			<button class="cancel btn">Cancel</button>
 		</div>
     </div>
 

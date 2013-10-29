@@ -20,16 +20,22 @@
   <body>
 
 	<div class="container" layout:fragment="content">
-        <p>Floorball fighters - welcome!</p>
-		<form action="#" th:action="@{/day/new}" method="post">
-		    <input type="submit" value="New day"/>
-		</form>
+		<div class="row">
+	        <p>Floorball fighters - welcome!</p>
+			<form action="#" th:action="@{/day/new}" method="post">
+			    <input type="submit" class="btn btn-primary" value="Create a new day"/>
+			</form>
+		</div>
+		<div class="row">
 		
-		<ul>
-		<li th:each="day : ${days}">
-			<a href="#" th:href="@{${'/day/' + day.id + '/view'}}" th:text="${'Day ' + day.id}">Day 1</a>
-		</li>
-		</ul>
+			<ul>
+			<li th:each="day : ${days}">
+				<a href="#" th:href="@{${'/day/' + day.id + '/view'}}">
+					<button type="button" class="btn btn-info" th:text="${'Day ' + day.id}">Day 1</button>
+				</a>
+			</li>
+			</ul>
+		</div>
     </div>
     
     <!-- Bootstrap core JavaScript

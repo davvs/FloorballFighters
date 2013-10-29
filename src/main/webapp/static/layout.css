@@ -4,6 +4,17 @@ body {
   padding-bottom: 20px;
 }
 
+li {
+	list-style-type: none;
+}
+
+.stripedPlayerList li {
+	margin-top: 1em;
+}
+.stripedPlayerList li:nth-child(odd) {
+	background-color: #f3f3fa;
+}
+
 .row {
 	margin-bottom: 15px;
 }
@@ -44,9 +55,19 @@ body {
 }
 
 #vestScore li, #istScore li, #istScore input, #istScore button, #vestScore input, #vestScore button {
-	font-size: 2em;
+	font-size: 1.5em;
+	white-space: nowrap;
 }  
 
 .cancel {
 	margin-top: 5em;
+}
+
+ul {
+	padding: 1px;
+}
+
+:checked + label {
+   background-color: white;
+   color: black;
 }
