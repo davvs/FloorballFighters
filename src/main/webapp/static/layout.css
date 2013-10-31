@@ -28,6 +28,11 @@ li {
 	padding: 0;
 }
 
+.first-cell {
+	border-right: 1px solid black;
+	text-align: left;
+}
+
 ul {
 	padding: 1px;
 }

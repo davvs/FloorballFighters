@@ -28,6 +28,8 @@
 		<table id="ranking" class="table table-striped">
 	        <thead>
 	          <tr>
+	            <th class="first-cell">Ranking points</th>
+	            
 	            <th>Name</th>
 	            <th>Goals</th>
 	            <th>Assists</th>
@@ -40,12 +42,12 @@
 	            <th>Wins</th>
 	            <th>Losses</th>
 	            <th>Ties</th>
-	            
-	            <th>Ranking points</th>
 	          </tr>
 	        </thead>
 	        <tbody>
 	          <tr th:each="sp : ${summarizedPlayers}" th:object="${sp}">
+	            <td class="first-cell" th:text="${sp.rankingPoints}">10</td>
+
 	            <td th:text="${sp.name}">Larry</td>
 	            <td th:text="${sp.goals}">1</td>
 	            <td th:text="${sp.assists}">2</td>
@@ -58,8 +60,6 @@
 	            <td th:text="${sp.wins}">7</td>
 	            <td th:text="${sp.losses}">8</td>
 	            <td th:text="${sp.ties}">9</td>
-	            
-	            <td th:text="${sp.rankingPoints}">10</td>
 	          </tr>
 	        </tbody>
 		</table>
