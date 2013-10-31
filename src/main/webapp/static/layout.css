@@ -11,6 +11,7 @@ li {
 .stripedPlayerList li {
 	margin-top: 1em;
 }
+
 .stripedPlayerList li:nth-child(odd) {
 	background-color: #f3f3fa;
 }
@@ -19,55 +20,41 @@ li {
 	margin-bottom: 15px;
 }
 
+.btn {
+	margin: 1px;
+}
 .sidebar-offcanvas ul {
 	list-style-type: none;
 	padding: 0;
-}
-
-.ist {
-	background-color: #ccddff;
-}
-
-.vest {
-	background-color: #ff3333;
-	color: #ffffff;
-}
-
-.focus {
-	font-size: 64px;
-}
-
-.scoreIcon {
-	width: 32px;
-	height: 32px;
-}
-
-#istName, #vestName {
-	cursor:pointer;
-}
-
-#vestScore h2, #istScore h2 {
-	font-size: 3em;
-}  
-
-#vestScore li, #istScore li {
-	list-style-type: none;
-}
-
-#vestScore li, #istScore li, #istScore input, #istScore button, #vestScore input, #vestScore button {
-	font-size: 1.5em;
-	white-space: nowrap;
-}  
-
-.cancel {
-	margin-top: 5em;
 }
 
 ul {
 	padding: 1px;
 }
 
-:checked + label {
-   background-color: white;
-   color: black;
+/* tables */
+table.tablesorter {
+	font-family:arial;
+	background-color: #CDCDCD;
+	margin:10px 0pt 15px;
+	font-size: 8pt;
+	width: 100%;
+	text-align: left;
+}
+
+.header {
+	background-image: url(../static/bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+	background-color: #8b8;
+}
+
+.headerSortUp {
+	background-image: url(../static/asc.gif);
+	background-color: #4b4;
+}
+.headerSortDown {
+	background-image: url(../static/desc.gif);
+	background-color: #4b4;
 }

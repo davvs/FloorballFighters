@@ -21,35 +21,52 @@
   <body>
 	<div class="container" layout:fragment="content">
 		<div class="row">
-			<h2 th:text="${'Day number ' + showDay}">Day number 123</h2>
-			<form action="#" th:action="@{${'/day/' + showDay + '/matchMakeAllRandom'}}" method="post">
-			    <input type="submit" class="btn btn-primary" value="Make random teams!"/>
-			</form>
+			<h2 th:text="${'Summary of day ' + showDay}">Summary of day 123</h2>
 		</div>
+
 		<div class="row">
-			<ul class="stripedPlayerList" th:remove="all-but-first">
-				<li th:each="dayPlayer : ${day.dayPlayers}">
-					<span class="pull-left" th:text="${dayPlayer.player.name}">player1</span>
-					<span class="pull-left ist" th:if="${dayPlayer.requiredTeam eq 1}">(Loyal to Ist)</span>
-					<span class="pull-left vest" th:if="${dayPlayer.requiredTeam eq 2}">(Loyal to Vest)</span>
-					<div class="pull-right">
-						<form action="#" th:action="@{${'/day/' + showDay + '/playerToggleTeam/' + dayPlayer.id}}" method="post">
-						    <input type="submit" class="btn btn-info" value="Toggle team"/>
-						</form>
-					</div>
-					<div class="clearfix"></div>
-				</li>
-				<li>player2</li>
-				<li>player3</li>
-				<li>player4</li>
-				<li>player5</li>
-			</ul>
-			<form action="#" th:action="@{${'/day/' + showDay + '/players'}}" method="get">
-			    <input type="submit" class="btn btn-info" value="Change participating players"/>
-			</form>
+		<table id="ranking" class="table table-striped">
+	        <thead>
+	          <tr>
+	            <th>Name</th>
+	            <th>Goals</th>
+	            <th>Assists</th>
+	            
+	            <th>Team total</th>
+	            
+	            <th>+/-</th>
+	            <th>Games</th>
+	            
+	            <th>Wins</th>
+	            <th>Losses</th>
+	            <th>Ties</th>
+	            
+	            <th>Ranking points</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          <tr th:each="sp : ${summarizedPlayers}" th:object="${sp}">
+	            <td th:text="${sp.name}">Larry</td>
+	            <td th:text="${sp.goals}">1</td>
+	            <td th:text="${sp.assists}">2</td>
+	            
+	            <td th:text="${sp.teamGoals + '-' + sp.opponentGoals}">2-3</td>
+	            
+	            <td th:text="${sp.plusMinus}">5</td>
+	            <td th:text="${sp.games}">6</td>
+	            
+	            <td th:text="${sp.wins}">7</td>
+	            <td th:text="${sp.losses}">8</td>
+	            <td th:text="${sp.ties}">9</td>
+	            
+	            <td th:text="${sp.rankingPoints}">10</td>
+	          </tr>
+	        </tbody>
+		</table>
 		</div>
+
 		<div class="row">
-			<h2>Todays games</h2>
+			<h2>Games played</h2>
 			<ul th:remove="all-but-first">
 				<li th:each="game : ${day.games}">
 					<a class="btn btn-info" th:href="@{${'/game/' + game.id + '/view'}}" href="#" th:text="${'game ' + game.id}">game 1: 3-5</a>
@@ -61,9 +78,6 @@
 			</ul>
 		</div>
 		
-		<div class="row">
-			<a class="btn btn-warning" th:href="@{${'/summary/day/' + showDay}}" href="#">Show the results of the day</a>
-		</div>
     </div>
     
     <!-- Bootstrap core JavaScript

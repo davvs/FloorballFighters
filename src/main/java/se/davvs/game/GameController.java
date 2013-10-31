@@ -1,5 +1,6 @@
 package se.davvs.game;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -53,6 +54,12 @@ public class GameController {
 			 }
  		 }
 
+		 
+		 int middle = Math.round((float)AllScoreTypes.allScoreTypes.length / 2);
+		 String[] scoreTypesLeft = Arrays.copyOfRange(AllScoreTypes.allScoreTypes, 0, middle);
+		 String[] scoreTypesRight = Arrays.copyOfRange(AllScoreTypes.allScoreTypes, middle, AllScoreTypes.allScoreTypes.length);
+
+		 
 		 model.addAttribute("scoreIst", istScore);
 		 model.addAttribute("scoreVest", vestScore);
 		 model.addAttribute("istPlayers", istPlayers);
@@ -60,7 +67,8 @@ public class GameController {
 		 model.addAttribute("showGame", showGame);
 		 model.addAttribute("showDay", game.getDay().getId());
 		 model.addAttribute("customScoreForm", customScoreForm);
-		 model.addAttribute("allScoreTypes", AllScoreTypes.allScoreTypes);
+		 model.addAttribute("scoreTypesLeft", scoreTypesLeft);
+		 model.addAttribute("scoreTypesRight", scoreTypesRight);
 		 return "game/view";
 	 }
 	 

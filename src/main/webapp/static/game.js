@@ -24,3 +24,7 @@ $('.cancel').click(function(){
 	  $('#istScore').css('display','none');
 });
 
+$(".hideOnClick").click(function(){
+	$(this).css('display', 'none');
+})
+

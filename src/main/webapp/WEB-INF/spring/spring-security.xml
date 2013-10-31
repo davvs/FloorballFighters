@@ -32,7 +32,8 @@ http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 		<intercept-url pattern="/day/**" access="isAuthenticated()"/>
 		<intercept-url pattern="/game/**" access="isAuthenticated()"/>
 		<intercept-url pattern="/user/**" access="isAuthenticated()"/>
-		
+		<intercept-url pattern="/summary/**" access="permitAll"/>
+
 		<intercept-url pattern="/favicon.png" access="permitAll"/>
 		
 		<intercept-url pattern="/" access="isAuthenticated()"/>

@@ -1,0 +1,65 @@
+input[type=radio] {
+	display: none;
+}
+
+ul {
+	padding: 0;
+}
+
+label {
+	width: 100%;
+	padding: 0.5em;
+}
+
+li {
+	list-style-type: none;
+}
+
+.focus {
+	font-size: 64px;
+}
+
+.scoreIcon {
+	width: 32px;
+	height: 32px;
+}
+
+#istName, #vestName {
+	cursor:pointer;
+}
+
+#vestScore h2, #istScore h2 {
+	font-size: 3em;
+}  
+
+#vestScore li, #istScore li {
+	list-style-type: none;
+}
+
+h3 {
+	font-style: italic;
+}
+#vestScore h3 {
+	color: #faa;
+}
+#istScore h3 {
+	color: #aaa;
+	font-style: italic;
+}
+
+
+#vestScore li, #istScore li, #istScore input, #istScore button, #vestScore input, #vestScore button {
+	font-size: 1.5em;
+	white-space: nowrap;
+}  
+
+.cancel {
+	background-color: transparent;
+	margin-top: 3em;
+}
+
+
+:checked + label {
+   background-color: white;
+   color: black;
+}

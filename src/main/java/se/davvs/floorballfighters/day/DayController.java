@@ -189,4 +189,5 @@ public class DayController {
 		 
 		 return "redirect:/game/" + game.getId() + "/view";
 	 }
+
 }
