@@ -16,6 +16,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -31,6 +32,7 @@ import com.jolbox.bonecp.BoneCPDataSource;
 @Configuration
 @ComponentScan(basePackages="se.davvs")
 @EnableJpaRepositories(queryLookupStrategy=Key.USE_DECLARED_QUERY, basePackages={"se.davvs.floorballfighters"})
+@EnableTransactionManagement
 @PropertySource(value = "classpath:floorball.properties")
 public class FloorballFightersConfiguration extends WebMvcConfigurerAdapter {
 	/* <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure --> */

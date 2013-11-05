@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -30,6 +31,7 @@ import se.davvs.floorballfighters.models.Player;
 
 @Controller
 @RequestMapping(value="/day/")
+@Transactional
 public class DayController {
 	@Resource DayRepository dayRepository;
 	@Resource PlayerRepository playerRepository;
@@ -74,7 +76,6 @@ public class DayController {
 		 return "redirect:/day/" + showDay + "/players";
 	 }
 
-	 @Transactional
 	 @RequestMapping(value="/{showDay}/updatePlayers", method = RequestMethod.POST)
 	 public String createDay(@PathVariable Integer showDay, PlayersForm createPlayerForm){
 		 if (createPlayerForm.getPlayers() != null){
@@ -94,7 +95,6 @@ public class DayController {
 		 return "redirect:/day/" + showDay + "/view";
 	 }
 
-	 @Transactional
 	 @RequestMapping(value="/{showDay}/playerToggleTeam/{dayPlayerId}", method = RequestMethod.POST)
 	 public String createDay(@PathVariable Integer showDay, @PathVariable Integer dayPlayerId, PlayersForm createPlayerForm){
 		 DayPlayer dp = dayPlayerRepository.findOne(dayPlayerId);
@@ -114,7 +114,11 @@ public class DayController {
 	 @RequestMapping(value="/{showDay}/view", method = RequestMethod.GET)
 	 public String viewDay(@PathVariable Integer showDay, Model model){
 		 Day day = dayRepository.findOne(showDay);
+		 Hibernate.initialize(day.getGames());
 
+		 for (DayPlayer dp : day.getDayPlayers()){
+			 Hibernate.initialize(dp.getPlayer());
+		 }
 		 model.addAttribute("day", day);
 		 model.addAttribute("showDay", showDay);
 		 return "day/view";

@@ -17,8 +17,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.FetchProfile;
+
 @Entity
 @Table(name="game", catalog = "floorballfighters")
+@FetchProfile(name = "goal-details", fetchOverrides = {
+		   @FetchProfile.FetchOverride(entity = Game.class, association = "gameTeamMembers", mode = FetchMode.JOIN),
+		   @FetchProfile.FetchOverride(entity = Goal.class, association = "scorer", mode = FetchMode.JOIN),
+		   @FetchProfile.FetchOverride(entity = Goal.class, association = "assister", mode = FetchMode.JOIN)
+		})
 public class Game implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -32,7 +40,7 @@ public class Game implements Serializable {
     private Set<GameTeamMember> gameTeamMembers = new HashSet<GameTeamMember>(0);
     private Set<Goal> goals;
     
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "game")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "game")
 	public Set<Goal> getGoals() {
 		return goals;
 	}
@@ -51,7 +59,7 @@ public class Game implements Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "did", updatable = true)
 	public Day getDay() {
 		return day;
@@ -61,7 +69,7 @@ public class Game implements Serializable {
 		this.day = day;
 	}
 
-	@OneToMany(mappedBy="game", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="game", fetch = FetchType.LAZY)
 	public Set<GameTeamMember> getGameTeamMembers() {
 		return gameTeamMembers;
 	}

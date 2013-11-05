@@ -1,17 +1,26 @@
-package se.davvs.game;
+package se.davvs.floorballfighters.game;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.servlet.http.HttpSession;
 
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import se.davvs.floorballfighters.jparepositories.GameRepository;
 import se.davvs.floorballfighters.jparepositories.GameTeamMemberRepository;
@@ -22,11 +31,13 @@ import se.davvs.floorballfighters.models.Goal;
 
 @Controller
 @RequestMapping(value="/game/")
+@Transactional
 public class GameController {
 
 	@Resource GameRepository gameRepository;
 	@Resource GoalRepository goalRepository;
 	@Resource GameTeamMemberRepository gameTeamMemberRepository;
+	@Inject LocalContainerEntityManagerFactoryBean entityManager;
 	
 	 @RequestMapping(value="/{showGame}/view", method = RequestMethod.GET)
 	 public String showHome(@PathVariable Integer showGame, CustomScoreForm customScoreForm, Model model) throws GameException{
@@ -35,6 +46,9 @@ public class GameController {
 		 List<GameTeamMember> vestPlayers = new LinkedList<GameTeamMember>();
 
 		 for(GameTeamMember gameTeamMember : game.getGameTeamMembers()){
+			 Hibernate.initialize(gameTeamMember.getPlayer());
+			 Hibernate.initialize(gameTeamMember.getScoredGoals());
+			 Hibernate.initialize(gameTeamMember.getAssistedGoals());
 			 if (gameTeamMember.getTeam() == 1){
 				 istPlayers.add(gameTeamMember);
 			 } else if (gameTeamMember.getTeam() == 2) {

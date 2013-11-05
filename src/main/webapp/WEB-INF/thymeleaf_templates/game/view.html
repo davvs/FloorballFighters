@@ -42,13 +42,15 @@
 				<div class="col-xs-5">
 					<ul class="list-group" th:remove="all-but-first">
 						<li class="list-group-item ist text-right"
-							th:each="gameMember : ${istPlayers}"><img class="scoreIcon"
+							th:each="gameMember : ${istPlayers}">
+							<img class="scoreIcon"
 							src="../../../static/goal.png" th:src="@{/static/goal.png}"
-							th:each="a : ${gameMember.scoredGoals}" /> <img
+							th:each="a : ${gameMember.scoredGoals}" />
+							<img
 							class="scoreIcon" src="../../../static/assist.png"
 							th:src="@{/static/assist.png}"
-							th:each="a : ${gameMember.assistedGoals}" /> <span
-							th:text="${gameMember.player.name}">player1</span></li>
+							th:each="a : ${gameMember.assistedGoals}" /> 
+						<span th:text="${gameMember.player.name}">player1</span></li>
 						<li class="list-group-item ist text-right">player2</li>
 						<li class="list-group-item ist text-right">player3</li>
 						<li class="list-group-item ist text-right">player4</li>

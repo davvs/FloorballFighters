@@ -21,7 +21,7 @@ public class DayPlayer {
 	private Player player;
 	private Integer requiredTeam;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "did", updatable = true)
 	public Day getDay() {
 		return day;
@@ -49,7 +49,7 @@ public class DayPlayer {
 	}
 
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "pid", updatable = true)
 	public Player getPlayer() {
 		return player;

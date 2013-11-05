@@ -47,7 +47,7 @@ public class Player implements Serializable {
 		this.name = name;
 	}
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "player")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
 	public Set<DayPlayer> getDayPlayers() {
 		return dayPlayers;
 	}
@@ -56,7 +56,7 @@ public class Player implements Serializable {
 		this.dayPlayers = dayPlayers;
 	}
 
-	@OneToMany(mappedBy="player", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="player", fetch = FetchType.LAZY)
 	public Set<GameTeamMember> getGameTeamMembers() {
 		return gameTeamMembers;
 	}

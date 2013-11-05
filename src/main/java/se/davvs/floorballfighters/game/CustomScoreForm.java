@@ -1,4 +1,4 @@
-package se.davvs.game;
+package se.davvs.floorballfighters.game;
 
 
 public class CustomScoreForm {

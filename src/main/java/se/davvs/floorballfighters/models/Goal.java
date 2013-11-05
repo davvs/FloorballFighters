@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.FetchProfile;
+
 @Entity
 @Table(name="goals", catalog = "floorballfighters")
 public class Goal {
@@ -23,7 +26,7 @@ public class Goal {
 	private Integer goalType;
 	private Integer team;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "scorerid", updatable = true)
 	public GameTeamMember getScorer() {
 		return scorer;
@@ -32,7 +35,7 @@ public class Goal {
 		this.scorer = scorer;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "assisterid", updatable = true)
 	public GameTeamMember getAssister() {
 		return assister;
@@ -41,7 +44,7 @@ public class Goal {
 		this.assister = assister;
 	}
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "gameid", updatable = true)
 	public Game getGame() {
 		return game;

@@ -27,7 +27,7 @@ public class GameTeamMember {
 	private Set<Goal> scoredGoals;
 	private Set<Goal> assistedGoals;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "scorer")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "scorer")
 	public Set<Goal> getScoredGoals() {
 		return scoredGoals;
 	}
@@ -35,7 +35,7 @@ public class GameTeamMember {
 		this.scoredGoals = scoredGoals;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "assister")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "assister")
 	public Set<Goal> getAssistedGoals() {
 		return assistedGoals;
 	}
@@ -61,7 +61,7 @@ public class GameTeamMember {
 		this.team = team;
 	}
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "gid", updatable = true)
 	public Game getGame() {
 		return game;
@@ -70,7 +70,7 @@ public class GameTeamMember {
 		this.game = game;
 	}
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "pid", updatable = true)
 	public Player getPlayer() {
 		return player;

@@ -50,7 +50,7 @@ public class Day implements Serializable {
 		this.date = date;
 	}
 
-	@OneToMany(mappedBy="day", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="day", fetch = FetchType.LAZY)
 	public Set<DayPlayer> getDayPlayers() {
 		return dayPlayers;
 	}
@@ -59,7 +59,7 @@ public class Day implements Serializable {
 		this.dayPlayers = dayPlayers;
 	}
 	
-	@OneToMany(mappedBy="day", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="day", fetch = FetchType.LAZY)
 	public Set<Game> getGames() {
 		return games;
 	}
