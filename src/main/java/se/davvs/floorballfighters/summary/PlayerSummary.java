@@ -12,9 +12,45 @@ public class PlayerSummary {
 	private Integer wins = 0;
 	private Integer losses = 0;
 	private Integer ties = 0;
-	
 	private Integer rankingPoints = 0;
+	private Integer id = 0;
+	
+	private float rankingPointsPerGame = 0;
+	private Integer matchmakingBase = 0;
+	private float matchmaking = 0;
+	
+	public Integer getMatchmakingBase() {
+		return matchmakingBase;
+	}
 
+	public void setMatchmakingBase(Integer matchmakingBase) {
+		this.matchmakingBase = matchmakingBase;
+	}
+
+	public float getMatchmaking() {
+		return matchmaking;
+	}
+
+	public void setMatchmaking(float matchmaking) {
+		this.matchmaking = matchmaking;
+	}
+	
+	public float getRankingPointsPerGame() {
+		return rankingPointsPerGame;
+	}
+
+	public void setRankingPointsPerGame(float rankingPointsPerGame) {
+		this.rankingPointsPerGame = rankingPointsPerGame;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 	public String getName() {
 		return name;
 	}

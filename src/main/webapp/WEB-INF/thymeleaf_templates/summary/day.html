@@ -21,14 +21,14 @@
   <body>
 	<div class="container" layout:fragment="content">
 		<div class="row">
-			<h2 th:text="${'Summary of day ' + showDay}">Summary of day 123</h2>
+			<h2 th:text="${'Summary of ' + showDay}">Summary of day 123</h2>
 		</div>
 
 		<div class="row">
 		<table id="ranking" class="table table-striped">
 	        <thead>
 	          <tr>
-	            <th class="first-cell">Ranking points</th>
+	          	<th class="first-cell">Total points</th>
 	            
 	            <th>Name</th>
 	            <th>Goals</th>
@@ -42,6 +42,12 @@
 	            <th>Wins</th>
 	            <th>Losses</th>
 	            <th>Ties</th>
+	            
+	       		<th>Points per game</th>
+
+	       		<th>Matchmaking base</th>
+	       		<th>Matchmaking</th>
+
 	          </tr>
 	        </thead>
 	        <tbody>
@@ -60,12 +66,17 @@
 	            <td th:text="${sp.wins}">7</td>
 	            <td th:text="${sp.losses}">8</td>
 	            <td th:text="${sp.ties}">9</td>
+
+	            <td th:text="${#numbers.formatDecimal(sp.rankingPointsPerGame,1,1,'POINT')}">10</td>
+	            <td th:text="${sp.matchmakingBase}">11</td>
+	            <td th:text="${#numbers.formatDecimal(sp.matchmaking,1,1,'POINT')}">12</td>
+
 	          </tr>
 	        </tbody>
 		</table>
 		</div>
 
-		<div class="row">
+		<div class="row" th:if="${day}" >
 			<h2>Games played</h2>
 			<ul th:remove="all-but-first">
 				<li th:each="game : ${day.games}">

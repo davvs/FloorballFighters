@@ -1,5 +1,7 @@
 package se.davvs.floorballfighters.summary;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.inject.Inject;
 
@@ -27,7 +29,14 @@ public class SummaryController {
 
 		model.addAttribute("summarizedPlayers", summaryService.getSummaryForDay(day));
 		model.addAttribute("day", day);
-		model.addAttribute("showDay", showDay);
+		model.addAttribute("showDay", "day " + showDay);
+		return "summary/day";
+	}
+	
+	@RequestMapping(value="/alltime", method = RequestMethod.GET)
+	public String matchmaking(Model model){
+		model.addAttribute("summarizedPlayers", summaryService.getDaySpanScore(dayRepository.findAll()));
+		model.addAttribute("showDay", "all time");
 		return "summary/day";
 	 }
 }
