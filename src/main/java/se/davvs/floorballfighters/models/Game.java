@@ -35,7 +35,11 @@ public class Game implements Serializable {
 
     private Integer id;
     private Integer team1Score =0;
+
 	private Integer team2Score =0;
+	private Float team1Skill = 0f;
+	private Float team2Skill = 0f;
+
     private Day day;
     private Set<GameTeamMember> gameTeamMembers = new HashSet<GameTeamMember>(0);
     private Set<Goal> goals;
@@ -96,4 +100,19 @@ public class Game implements Serializable {
 		this.team2Score = team2Score;
 	}
 
+	@Column(name = "team2Skill", unique = false, nullable = true)
+	public Float getTeam1Skill() {
+		return team1Skill;
+	}
+	public void setTeam1Skill(Float team1Skill) {
+		this.team1Skill = team1Skill;
+	}
+	
+	@Column(name = "team1Skill", unique = false, nullable = true)
+	public Float getTeam2Skill() {
+		return team2Skill;
+	}
+	public void setTeam2Skill(Float team2Skill) {
+		this.team2Skill = team2Skill;
+	}
 }

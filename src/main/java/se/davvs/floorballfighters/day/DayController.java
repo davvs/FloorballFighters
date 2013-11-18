@@ -28,6 +28,8 @@ import se.davvs.floorballfighters.models.DayPlayer;
 import se.davvs.floorballfighters.models.Game;
 import se.davvs.floorballfighters.models.GameTeamMember;
 import se.davvs.floorballfighters.models.Player;
+import se.davvs.floorballfighters.summary.GamePowerlevels;
+import se.davvs.floorballfighters.summary.SummaryService;
 
 @Controller
 @RequestMapping(value="/day/")
@@ -38,6 +40,7 @@ public class DayController {
 	@Resource GameRepository gameRepository;
 	@Resource GameTeamMemberRepository gameTeamMemberRepository;
 	@Resource DayPlayerRepository dayPlayerRepository;
+	@Resource SummaryService summaryService;
 	
 	 @RequestMapping(value="/new", method = RequestMethod.POST)
 	 public String createDay(Model model){
@@ -128,6 +131,7 @@ public class DayController {
 	 public String showHome(@PathVariable Integer showDay, Model model){
 		 Random r = new Random();
 		 Day day = dayRepository.findOne(showDay);
+
 		 Game game = new Game();
 		 game.setTeam1Score(0);
 		 game.setTeam2Score(0);
@@ -190,6 +194,12 @@ public class DayController {
 			 gameTeamMemberRepository.save(gameTeamMember);
 
 		 }
+		 
+		 GamePowerlevels gamePowerlevels = summaryService.getPowerlevel(gameTeamMembers, summaryService.getHashMapSummaryForDays(dayRepository.findAll()));
+		 game.setTeam1Skill(gamePowerlevels.getIstPowerlevel());
+		 game.setTeam2Skill(gamePowerlevels.getVestPowerlevel());
+
+		 gameRepository.save(game);
 		 
 		 return "redirect:/game/" + game.getId() + "/view";
 	 }

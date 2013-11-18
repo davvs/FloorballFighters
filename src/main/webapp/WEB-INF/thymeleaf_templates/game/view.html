@@ -27,21 +27,27 @@
 			<!-- 		<h2 th:text="${'Game number ' + showGame}">Game number 123</h2> -->
 
 			<div class="row">
-				<div class="col-sm-4 text-center">
-					<div class="col-sm-offset-4 col-sm-8 ist focus" id="istName">Ist</div>
+				<div class="col-sm-4 ist-score text-center">
+					<div class="col-sm-offset-4 ist col-sm-8">
+						<span class="focus" id="istName">Ist</span>
+						<div th:if="${istPowerlevel}" class="ist">Powerlevel: <span th:text="${#numbers.formatDecimal(istPowerlevel,1,1,'POINT')}">120</span></div>
+					</div>
 				</div>
 
 				<div class="col-sm-3 text-center focus"
-					th:text="${scoreIst + ' - ' + scoreVest}">12 - 12</div>
+					th:text="${scoreIst + ' - ' + scoreVest}"><span id="istScore">12</span> - <span id="vestScore">12</span></div>
 
-				<div class="col-sm-4 text-center">
-					<div class="col-sm-8 vest focus" id="vestName">V&#228;st</div>
+				<div class="col-sm-4 vest-score text-center">
+					<div class="vest col-sm-8">
+						<span class="focus" id="vestName">V&#228;st</span>
+						<div th:if="${vestPowerlevel}" class="vest">Powerlevel: <span th:text="${#numbers.formatDecimal(vestPowerlevel,1,1,'POINT')}">120</span></div>
+					</div>
 				</div>
 			</div>
 			<div class="row show-grid">
 				<div class="col-xs-5">
 					<ul class="list-group" th:remove="all-but-first">
-						<li class="list-group-item ist text-right"
+						<li class="list-group-item ist ist-score text-right"
 							th:each="gameMember : ${istPlayers}">
 							<img class="scoreIcon"
 							src="../../../static/goal.png" th:src="@{/static/goal.png}"
@@ -51,16 +57,16 @@
 							th:src="@{/static/assist.png}"
 							th:each="a : ${gameMember.assistedGoals}" /> 
 						<span th:text="${gameMember.player.name}">player1</span></li>
-						<li class="list-group-item ist text-right">player2</li>
-						<li class="list-group-item ist text-right">player3</li>
-						<li class="list-group-item ist text-right">player4</li>
-						<li class="list-group-item ist text-right">player5</li>
+						<li class="list-group-item ist ist-score text-right">player2</li>
+						<li class="list-group-item ist ist-score text-right">player3</li>
+						<li class="list-group-item ist ist-score text-right">player4</li>
+						<li class="list-group-item ist ist-score text-right">player5</li>
 					</ul>
 				</div>
 				<div class="col-xs-1"></div>
 				<div class="col-xs-5">
 					<ul class="list-group" th:remove="all-but-first">
-						<li class="list-group-item vest text-left"
+						<li class="list-group-item vest vest-score text-left"
 							th:each="gameMember : ${vestPlayers}"><img class="scoreIcon"
 							src="../../../static/goal.png" th:src="@{/static/goal.png}"
 							th:each="a : ${gameMember.scoredGoals}" /> <img
@@ -68,10 +74,10 @@
 							th:src="@{/static/assist.png}"
 							th:each="a : ${gameMember.assistedGoals}" /> <span
 							th:text="${gameMember.player.name}">player1</span></li>
-						<li class="list-group-item vest text-left">player2</li>
-						<li class="list-group-item vest text-left">player3</li>
-						<li class="list-group-item vest text-left">player4</li>
-						<li class="list-group-item vest text-left">player5</li>
+						<li class="list-group-item vest vest-score text-left">player2</li>
+						<li class="list-group-item vest vest-score text-left">player3</li>
+						<li class="list-group-item vest vest-score text-left">player4</li>
+						<li class="list-group-item vest vest-score text-left">player5</li>
 					</ul>
 				</div>
 			</div>

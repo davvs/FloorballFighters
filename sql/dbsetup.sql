@@ -129,3 +129,8 @@ CREATE TABLE `goals` (
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE game
+ADD team1Skill float;
+
+ALTER TABLE game
+ADD team2Skill float;

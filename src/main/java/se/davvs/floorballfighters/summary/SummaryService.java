@@ -1,10 +1,14 @@
 package se.davvs.floorballfighters.summary;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -40,9 +44,8 @@ public class SummaryService {
 		return getSummaryForDays(days);
 	}
 	
-	public List<PlayerSummary> getSummaryForDays(List<Day> days){
+	public HashMap<Integer, PlayerSummary> getHashMapSummaryForDays(List<Day> days){
 		HashMap<Integer, PlayerSummary> playerSummary = new HashMap<Integer, PlayerSummary>();
-		
 		for (Day day : days) {
 			
 			Set<Game> games = day.getGames();
@@ -101,8 +104,10 @@ public class SummaryService {
 			}
 		}
 		
-		List<PlayerSummary> playerSummaryList = new ArrayList<PlayerSummary>(playerSummary.values());
-		for (PlayerSummary ps : playerSummaryList){
+	    Iterator<Entry<Integer, PlayerSummary>> it = playerSummary.entrySet().iterator();
+	    while (it.hasNext()) {
+	    	Map.Entry<Integer, PlayerSummary> curr = (Map.Entry<Integer, PlayerSummary>)it.next();
+	    	PlayerSummary ps = (PlayerSummary) curr.getValue();
 			if (ps.getGames() > 0){
 				ps.setRankingPointsPerGame((float)ps.getRankingPoints() / ps.getGames());
 				ps.setMatchmaking((float)ps.getMatchmakingBase() / ps.getGames());
@@ -110,10 +115,47 @@ public class SummaryService {
 				ps.setRankingPointsPerGame(0);
 				ps.setMatchmaking(0);
 			}
-			
-		}
-		//TODO Copy from HashMap
+	    }
+
+		return playerSummary;
+	}
+	
+	public List<PlayerSummary> getSummaryForDays(List<Day> days){
+		HashMap<Integer, PlayerSummary> playerSummary = getHashMapSummaryForDays(days);
+
+		List<PlayerSummary> playerSummaryList = new ArrayList<PlayerSummary>(playerSummary.values());
 		return sort(playerSummaryList);
+	}
+	
+	public GamePowerlevels getPowerlevel(Collection<GameTeamMember> gameTeamMemberSet , HashMap<Integer, PlayerSummary> playerSummaryHashMap) {
+		GamePowerlevels ret = new GamePowerlevels();
+		float istPowerlevel = 0;
+		int istTotalPlayers = 0;
+		float vestPowerlevel = 0;
+		int vestTotalPlayers = 0;
+		for (GameTeamMember teamMember : gameTeamMemberSet){
+			PlayerSummary ps = playerSummaryHashMap.get(teamMember.getPlayer().getId());
+			if (teamMember.getTeam() == 1){
+				istPowerlevel += ps.getMatchmaking();
+				istTotalPlayers ++;
+			} else {
+				vestPowerlevel += ps.getMatchmaking();
+				vestTotalPlayers ++;
+			}
+		}
+		if (istTotalPlayers > 0){
+			ret.setIstPowerlevel(istPowerlevel / istTotalPlayers);
+		} else {
+			ret.setIstPowerlevel(0f);
+		}
+		
+		if (vestTotalPlayers > 0){
+			ret.setVestPowerlevel(vestPowerlevel / vestTotalPlayers);
+		} else {
+			ret.setVestPowerlevel(0f);
+		}
+		
+		return ret;
 	}
 
 	public void calculateRankingPoints(PlayerSummary ps){

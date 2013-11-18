@@ -22,12 +22,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import se.davvs.floorballfighters.jparepositories.DayRepository;
 import se.davvs.floorballfighters.jparepositories.GameRepository;
 import se.davvs.floorballfighters.jparepositories.GameTeamMemberRepository;
 import se.davvs.floorballfighters.jparepositories.GoalRepository;
 import se.davvs.floorballfighters.models.Game;
 import se.davvs.floorballfighters.models.GameTeamMember;
 import se.davvs.floorballfighters.models.Goal;
+import se.davvs.floorballfighters.summary.GamePowerlevels;
+import se.davvs.floorballfighters.summary.SummaryService;
 
 @Controller
 @RequestMapping(value="/game/")
@@ -36,8 +39,10 @@ public class GameController {
 
 	@Resource GameRepository gameRepository;
 	@Resource GoalRepository goalRepository;
+	@Resource DayRepository dayRepository;
 	@Resource GameTeamMemberRepository gameTeamMemberRepository;
 	@Inject LocalContainerEntityManagerFactoryBean entityManager;
+	@Resource SummaryService summaryService;
 	
 	 @RequestMapping(value="/{showGame}/view", method = RequestMethod.GET)
 	 public String showHome(@PathVariable Integer showGame, CustomScoreForm customScoreForm, Model model) throws GameException{
@@ -68,11 +73,12 @@ public class GameController {
 			 }
  		 }
 
-		 
 		 int middle = Math.round((float)AllScoreTypes.allScoreTypes.length / 2);
 		 String[] scoreTypesLeft = Arrays.copyOfRange(AllScoreTypes.allScoreTypes, 0, middle);
 		 String[] scoreTypesRight = Arrays.copyOfRange(AllScoreTypes.allScoreTypes, middle, AllScoreTypes.allScoreTypes.length);
 
+		 model.addAttribute("istPowerlevel", game.getTeam1Skill());
+		 model.addAttribute("vestPowerlevel", game.getTeam2Skill());
 		 
 		 model.addAttribute("scoreIst", istScore);
 		 model.addAttribute("scoreVest", vestScore);
