@@ -45,9 +45,6 @@
 	            
 	       		<th>Points per game</th>
 
-	       		<th>Matchmaking base</th>
-	       		<th>Matchmaking</th>
-
 	          </tr>
 	        </thead>
 	        <tbody>
@@ -68,8 +65,6 @@
 	            <td th:text="${sp.ties}">9</td>
 
 	            <td th:text="${#numbers.formatDecimal(sp.rankingPointsPerGame,1,1,'POINT')}">10</td>
-	            <td th:text="${sp.matchmakingBase}">11</td>
-	            <td th:text="${#numbers.formatDecimal(sp.matchmaking,1,1,'POINT')}">12</td>
 
 	          </tr>
 	        </tbody>
